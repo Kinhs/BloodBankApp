@@ -98,13 +98,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        signup.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        resetpass.setOnClickListener(new View.OnClickListener() {
 //            @Override
