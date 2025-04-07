@@ -28,6 +28,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import group.eight.bloodbankapp.R;
+import group.eight.bloodbankapp.fragments.HomeView;
 import group.eight.bloodbankapp.models.User;
 
 public class Dashboard extends AppCompatActivity
@@ -156,7 +157,7 @@ public class Dashboard extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == home) {
+        if (id == R.id.home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new HomeView()).commit();
 
         } else if (id == R.id.userprofile) {
