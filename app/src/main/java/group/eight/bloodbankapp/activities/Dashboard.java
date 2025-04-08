@@ -28,6 +28,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import group.eight.bloodbankapp.R;
+import group.eight.bloodbankapp.fragments.AchievementsView;
+import group.eight.bloodbankapp.fragments.BloodInfo;
 import group.eight.bloodbankapp.fragments.HomeView;
 import group.eight.bloodbankapp.models.User;
 
@@ -144,9 +146,6 @@ public class Dashboard extends AppCompatActivity
         if (id == R.id.donateinfo) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new BloodInfo()).commit();
         }
-        if (id == R.id.devinfo) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new AboutUs()).commit();
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -161,11 +160,11 @@ public class Dashboard extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new HomeView()).commit();
 
         } else if (id == R.id.userprofile) {
-            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), CreateAccountActivity.class));
 
         }
         else if (id == R.id.user_achiev) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new AchievmentsView()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new AchievementsView()).commit();
 
         }
         else if (id == R.id.logout) {
