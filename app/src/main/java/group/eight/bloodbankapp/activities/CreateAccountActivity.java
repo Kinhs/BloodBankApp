@@ -78,8 +78,8 @@ public class CreateAccountActivity extends AppCompatActivity {
             retypePassword.setVisibility(View.GONE);
             btnSignup.setText("Update Profile");
             pd.dismiss();
-            /// getActionBar().setTitle("Profile");
-            getSupportActionBar().setTitle("Profile");
+            //getActionBar().setTitle("Profile");
+            //getSupportActionBar().setTitle("Profile");
             findViewById(R.id.image_logo).setVisibility(View.GONE);
             isUpdate = true;
 

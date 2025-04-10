@@ -27,6 +27,10 @@
             android:name=".activities.CreateAccountActivity"
             android:label="Create Account" />
         <activity
+            android:name=".activities.Dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.PostActivity" />
+        <activity
             android:name=".activities.SplashActivity"
             android:exported="true">
             <intent-filter>

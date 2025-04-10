@@ -31,6 +31,7 @@ import group.eight.bloodbankapp.R;
 import group.eight.bloodbankapp.fragments.AchievementsView;
 import group.eight.bloodbankapp.fragments.BloodInfo;
 import group.eight.bloodbankapp.fragments.HomeView;
+import group.eight.bloodbankapp.fragments.SearchDonorFragment;
 import group.eight.bloodbankapp.models.User;
 
 public class Dashboard extends AppCompatActivity
@@ -176,10 +177,11 @@ public class Dashboard extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new SearchDonorFragment()).commit();
 
-        } else if (id == R.id.nearby_hospital) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new NearByHospitalActivity()).commit();
-
         }
+//        else if (id == R.id.nearby_hospital) {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new NearByHospitalActivity()).commit();
+//
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

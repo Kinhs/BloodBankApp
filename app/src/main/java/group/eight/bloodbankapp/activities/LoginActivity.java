@@ -74,13 +74,9 @@ public class LoginActivity extends AppCompatActivity {
                                                     Toast.LENGTH_LONG).show();
                                             Log.v("error", task.getException().getMessage());
                                         } else {
-                                            // Show success message instead of going to Dashboard
-                                            Toast.makeText(getApplicationContext(),
-                                                    "Login Successful! Welcome " + email,
-                                                    Toast.LENGTH_LONG).show();
-
-                                            // Clear password field after successful login
-                                            inputpassword.setText("");
+                                            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                                            startActivity(intent);
+                                            finish();
                                         }
                                         pd.dismiss();
                                     }
