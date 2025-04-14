@@ -1,5 +1,6 @@
 package group.eight.bloodbankapp.activities;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,22 +27,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 import group.eight.bloodbankapp.R;
 import group.eight.bloodbankapp.models.User;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private EditText inputemail, inputpassword, retypePassword, fullName, address, contact;
     private FirebaseAuth mAuth;
-    private Button btnSignup;
     private ProgressDialog pd;
     private Spinner gender, bloodgroup, division;
 
     private boolean isUpdate = false;
 
     private DatabaseReference db_ref, donor_ref;
-    private FirebaseDatabase db_User;
     private CheckBox isDonor;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         pd.show();
         setContentView(R.layout.activity_create_account);
 
-        db_User = FirebaseDatabase.getInstance();
+        FirebaseDatabase db_User = FirebaseDatabase.getInstance();
         db_ref = db_User.getReference("users");
         donor_ref = db_User.getReference("donors");
         mAuth = FirebaseAuth.getInstance();
@@ -68,8 +70,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         contact = findViewById(R.id.inputMobile);
         isDonor = findViewById(R.id.checkbox);
 
-        btnSignup = findViewById(R.id.button_register);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Button btnSignup = findViewById(R.id.button_register);
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         if (mAuth.getCurrentUser() != null) {
 
@@ -78,8 +80,8 @@ public class CreateAccountActivity extends AppCompatActivity {
             retypePassword.setVisibility(View.GONE);
             btnSignup.setText("Update Profile");
             pd.dismiss();
-            //getActionBar().setTitle("Profile");
-            //getSupportActionBar().setTitle("Profile");
+            //Objects.requireNonNull(getActionBar()).setTitle("Profile");
+            //Objects.requireNonNull(getSupportActionBar()).setTitle("Profile");
             findViewById(R.id.image_logo).setVisibility(View.GONE);
             isUpdate = true;
 
@@ -168,7 +170,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                         address.requestFocusFromTouch();
                     } else {
                         if (!isUpdate) {
-                            if (email.length() == 0) {
+                            if (email.isEmpty()) {
                                 ShowError("Email ID");
                                 inputemail.requestFocusFromTouch();
                             } else if (password.length() <= 5) {
@@ -274,10 +276,9 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
