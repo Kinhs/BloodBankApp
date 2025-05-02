@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "929503516995",
+    "firebase_url": "https://blood-bank-cf47e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "blood-bank-cf47e",
+    "storage_bucket": "blood-bank-cf47e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929503516995:android:cbd9a51ddfd6320252b7f6",
+        "android_client_info": {
+          "package_name": "com.group8.bloodbank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJe_l6n5qh41RzllG0NH1Zm5lvy2iiZxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
