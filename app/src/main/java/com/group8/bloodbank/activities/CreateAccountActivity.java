@@ -1,4 +1,4 @@
-package group.eight.bloodbankapp.activities;
+package com.group8.bloodbank.activities;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -26,11 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.group8.bloodbank.R;
+import com.group8.bloodbank.models.User;
 
-import java.util.Objects;
-
-import group.eight.bloodbankapp.R;
-import group.eight.bloodbankapp.models.User;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private EditText inputemail, inputpassword, retypePassword, fullName, address, contact;

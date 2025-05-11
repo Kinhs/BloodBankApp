@@ -8,6 +8,59 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="register">Create an account</string>
     <string name="forgotpass">Forgot password?</string>
+    <string name="displayName">Full Name\n</string>
+    <string name="mobile">Phone Number</string>
+    <string name="userAddress">Address</string>
+    <string name="prompt_confirm_password">Confirm Password</string>
+    <string name="signup">Register</string>
+
+    <array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </array>
+
+    <array name="Blood_Group">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </array>
+
+    <array name="division_list">
+        <item>Ba Dinh</item>
+        <item>Hoan Kiem</item>
+        <item>Dong Da</item>
+        <item>Hai Ba Trung</item>
+        <item>Cau Giay</item>
+        <item>Thanh Xuan</item>
+        <item>Hoang Mai</item>
+        <item>Long Bien</item>
+        <item>Nam Tu Liem</item>
+        <item>Bac Tu Liem</item>
+        <item>Tay Ho</item>
+        <item>Ha Dong</item>
+        <item>Soc Son</item>
+        <item>Dong Anh</item>
+        <item>Gia Lam</item>
+        <item>Thanh Tri</item>
+        <item>Me Linh</item>
+        <item>Thuong Tin</item>
+        <item>Phu Xuyen</item>
+        <item>Ung Hoa</item>
+        <item>My Duc</item>
+        <item>Chuong My</item>
+        <item>Thanh Oai</item>
+        <item>Dan Phuong</item>
+        <item>Hoai Duc</item>
+        <item>Quoc Oai</item>
+        <item>Ba Vi</item>
+        <item>Thach That</item>
+        <item>Son Tay</item>
+    </array>
 
 
 </resources>

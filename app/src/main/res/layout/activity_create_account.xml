@@ -23,7 +23,7 @@
             android:layout_marginTop="?attr/actionBarSize"
             android:layout_marginBottom="40dp"
             android:background="@drawable/circle"
-            android:src="@mipmap/blood_bank_icon_round" />
+            android:src="@drawable/blood_bank_icon_round" />
 
 
         <LinearLayout

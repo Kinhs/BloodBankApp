@@ -27,6 +27,9 @@
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login" />
+        <activity
+            android:name=".activities.CreateAccountActivity"
+            android:label="Create Account"  />
         <activity android:name=".MainActivity"/>
 
     </application>

@@ -7,7 +7,6 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.group8.bloodbank.MainActivity;
 import com.group8.bloodbank.R;
 
 @SuppressLint("CustomSplashScreen")
