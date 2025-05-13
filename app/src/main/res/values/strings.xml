@@ -13,6 +13,11 @@
     <string name="userAddress">Address</string>
     <string name="prompt_confirm_password">Confirm Password</string>
     <string name="signup">Register</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
 
     <array name="gender">
         <item>Male</item>

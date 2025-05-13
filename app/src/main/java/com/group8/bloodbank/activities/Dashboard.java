@@ -26,13 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import group.eight.bloodbankapp.R;
-import group.eight.bloodbankapp.fragments.AchievementsView;
-import group.eight.bloodbankapp.fragments.BloodInfo;
-import group.eight.bloodbankapp.fragments.HomeView;
-import group.eight.bloodbankapp.fragments.SearchDonorFragment;
-import group.eight.bloodbankapp.models.User;
+import com.group8.bloodbank.R;
+import com.group8.bloodbank.models.User;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
