@@ -23,14 +23,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.group8.bloodbank.R;
+import com.group8.bloodbank.activities.Dashboard;
+import com.group8.bloodbank.models.DonorData;
+import com.group8.bloodbank.models.User;
 
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import group.eight.bloodbankapp.R;
-import group.eight.bloodbankapp.activities.Dashboard;
-import group.eight.bloodbankapp.models.DonorData;
-import group.eight.bloodbankapp.models.User;
+
 
 public class AchievementsView extends Fragment {
     private int cur_day, cur_month, cur_year, day, month, year, totday;

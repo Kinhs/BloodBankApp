@@ -23,10 +23,6 @@
             android:icon="@drawable/ic_find_donor"
             android:title="@string/fndBlood" />
         <item
-            android:id="@+id/nearby_hospital"
-            android:icon="@drawable/ic_find_hospital"
-            android:title="@string/nearH" />
-        <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_logout"
             android:title="@string/lgout" />

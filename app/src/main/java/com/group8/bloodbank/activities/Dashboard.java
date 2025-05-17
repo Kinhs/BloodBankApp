@@ -27,6 +27,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.group8.bloodbank.R;
+import com.group8.bloodbank.fragments.AchievementsView;
+import com.group8.bloodbank.fragments.BloodInfo;
+import com.group8.bloodbank.fragments.HomeView;
+import com.group8.bloodbank.fragments.SearchDonorFragment;
 import com.group8.bloodbank.models.User;
 
 public class Dashboard extends AppCompatActivity

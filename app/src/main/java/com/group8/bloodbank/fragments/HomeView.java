@@ -1,4 +1,4 @@
-package group.eight.bloodbankapp.fragments;
+package com.group8.bloodbank.fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -23,13 +23,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.group8.bloodbank.R;
+import com.group8.bloodbank.adapters.BloodRequestAdapter;
+import com.group8.bloodbank.models.CustomUserData;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import group.eight.bloodbankapp.R;
-import group.eight.bloodbankapp.adapters.BloodRequestAdapter;
-import group.eight.bloodbankapp.models.CustomUserData;
 
 public class HomeView extends Fragment {
 

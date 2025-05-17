@@ -1,4 +1,4 @@
-package group.eight.bloodbankapp.fragments;
+package com.group8.bloodbank.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import group.eight.bloodbankapp.R;
+import com.group8.bloodbank.R;
 
 public class BloodInfo extends Fragment {
     @Nullable
