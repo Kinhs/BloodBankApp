@@ -28,6 +28,9 @@
     <string name="achiev">Achievements</string>
     <string name="fndBlood">Find Blood Donor</string>
     <string name="lgout">Log out</string>
+    <string name="BloodGroup">Blood Group</string>
+    <string name="Division">Choose Division</string>
+    <string name="Post">Post</string>
 
     <array name="gender">
         <item>Male</item>

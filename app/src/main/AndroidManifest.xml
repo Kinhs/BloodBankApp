@@ -30,6 +30,8 @@
         <activity
             android:name=".activities.CreateAccountActivity"
             android:label="Create Account"  />
+        <activity android:name=".activities.Dashboard"/>
+        <activity android:name=".activities.PostActivity"/>
         <activity android:name=".MainActivity"/>
 
     </application>

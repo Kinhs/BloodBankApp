@@ -40,9 +40,9 @@ public class LoginActivity extends AppCompatActivity {
 
         if(mAuth.getCurrentUser() != null)
         {
-            Toast.makeText(getApplicationContext(),
-                    "Already logged in as " + mAuth.getCurrentUser().getEmail(),
-                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+            startActivity(intent);
+            finish();
         }
 
         inputemail = findViewById(R.id.input_username);
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     Toast.LENGTH_LONG).show();
                                             Log.v("error", task.getException().getMessage());
                                         } else {
-                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                                             startActivity(intent);
                                             finish();
                                         }
