@@ -31,7 +31,8 @@
             android:name=".activities.CreateAccountActivity"
             android:label="Create Account"  />
         <activity android:name=".activities.Dashboard"/>
-        <activity android:name=".activities.PostActivity"/>
+        <activity android:name=".activities.PostActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"/>
         <activity android:name=".MainActivity"/>
 
     </application>

@@ -1,6 +1,5 @@
 package com.group8.bloodbank.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,17 +20,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.group8.bloodbank.R;
 import com.group8.bloodbank.models.User;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class PostActivity extends AppCompatActivity {
 
-    ProgressDialog pd;
-
+    ProgressBar progressBar;
     EditText text1, text2;
     Spinner spinner1, spinner2;
     Button btnpost;
@@ -48,135 +47,140 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        pd = new ProgressDialog(this);
-        pd.setMessage("Loading...");
-        pd.setCancelable(true);
-        pd.setCanceledOnTouchOutside(false);
-
-        //getSupportActionBar().setTitle("Post Blood Request");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        progressBar = findViewById(R.id.progress_bar);
         text1 = findViewById(R.id.getMobile);
         text2 = findViewById(R.id.getLocation);
-
         spinner1 = findViewById(R.id.SpinnerBlood);
         spinner2 = findViewById(R.id.SpinnerDivision);
-
         btnpost = findViewById(R.id.postbtn);
 
-        cal = Calendar.getInstance();
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Post Blood Request");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        cal = Calendar.getInstance();
         int day = cal.get(Calendar.DAY_OF_MONTH);
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH) + 1;
         int year = cal.get(Calendar.YEAR);
         int hour = cal.get(Calendar.HOUR);
         int min = cal.get(Calendar.MINUTE);
-        month+=1;
-        Time = "";
-        Date = "";
-        String ampm="AM";
+        String ampm = cal.get(Calendar.AM_PM) == Calendar.PM ? "PM" : "AM";
 
-        if(cal.get(Calendar.AM_PM) ==1)
-        {
-            ampm = "PM";
-        }
-
-        if(hour<10)
-        {
-            Time += "0";
-        }
-        Time += hour;
-        Time +=":";
-
-        if(min<10) {
-            Time += "0";
-        }
-
-        Time +=min;
-        Time +=(" "+ampm);
-
-        Date = day+"/"+month+"/"+year;
-
-        FirebaseUser cur_user = mAuth.getInstance().getCurrentUser();
-
-        if(cur_user == null)
-        {
-            startActivity(new Intent(PostActivity.this, LoginActivity.class));
-        } else {
-            uid = cur_user.getUid();
-        }
+        Time = (hour < 10 ? "0" : "") + hour + ":" + (min < 10 ? "0" : "") + min + " " + ampm;
+        Date = day + "/" + month + "/" + year;
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser cur_user = mAuth.getCurrentUser();
+
+        if (cur_user == null) {
+            startActivity(new Intent(PostActivity.this, LoginActivity.class));
+            finish();
+            return;
+        }
+
+        uid = cur_user.getUid();
         fdb = FirebaseDatabase.getInstance();
         db_ref = fdb.getReference("posts");
 
-        try {
-            btnpost.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    pd.show();
-                    final Query findname = fdb.getReference("users").child(uid);
+        // Fetch user data and pre-populate fields
+        fetchUserData();
 
-                    if(text1.getText().length() == 0)
-                    {
-                        Toast.makeText(getApplicationContext(), "Enter your contact number!",
-                                Toast.LENGTH_LONG).show();
+        btnpost.setOnClickListener(v -> {
+            progressBar.setVisibility(View.VISIBLE);
+            if (text1.getText().toString().trim().isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Enter your contact number!", Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
+            } else if (text2.getText().toString().trim().isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Enter your location!", Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
+            } else {
+                savePost();
+            }
+        });
+    }
+
+    private void fetchUserData() {
+        progressBar.setVisibility(View.VISIBLE);
+        DatabaseReference userRef = fdb.getReference("users").child(uid);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        // Pre-populate EditText fields
+                        if (user.getContact() != null) {
+                            text1.setText(user.getContact());
+                        }
+                        if (user.getAddress() != null) {
+                            text2.setText(user.getAddress());
+                        }
+
+                        // Pre-populate Spinners
+                        setSpinnerSelection(spinner1, user.getBloodGroup());
+                        setSpinnerSelection(spinner2, user.getDivision());
                     }
-                    else if(text2.getText().length() == 0)
-                    {
-                        Toast.makeText(getApplicationContext(), "Enter your location!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                    else {
-                        findname.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                if (dataSnapshot.exists()) {
-                                    db_ref.child(uid).child("Name").setValue(dataSnapshot.getValue(User.class).getName());
-                                    db_ref.child(uid).child("Contact").setValue(text1.getText().toString());
-                                    db_ref.child(uid).child("Address").setValue(text2.getText().toString());
-                                    db_ref.child(uid).child("Division").setValue(spinner2.getSelectedItem().toString());
-                                    db_ref.child(uid).child("BloodGroup").setValue(spinner1.getSelectedItem().toString());
-                                    db_ref.child(uid).child("Time").setValue(Time);
-                                    db_ref.child(uid).child("Date").setValue(Date);
-                                    Toast.makeText(PostActivity.this, "Your post has been created successfully",
-                                            Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(PostActivity.this, Dashboard.class));
-
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Database error occured.",
-                                            Toast.LENGTH_LONG).show();
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                Log.d("User", databaseError.getMessage());
-
-                            }
-                        });
-                    }
+                } else {
+                    Toast.makeText(PostActivity.this, "User data not found.", Toast.LENGTH_SHORT).show();
                 }
-            });
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        pd.dismiss();
+                progressBar.setVisibility(View.GONE);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(PostActivity.this, "Failed to load user data.", Toast.LENGTH_SHORT).show();
+                Log.e("PostActivity", "Database error: " + databaseError.getMessage());
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void setSpinnerSelection(Spinner spinner, int position) {
+        if (position >= 0 && position < spinner.getCount()) {
+            spinner.setSelection(position);
+        }
+    }
+
+    private void savePost() {
+        DatabaseReference userRef = fdb.getReference("users").child(uid);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        DatabaseReference postRef = db_ref.child(uid);
+                        postRef.child("Name").setValue(user.getName());
+                        postRef.child("Contact").setValue(text1.getText().toString());
+                        postRef.child("Address").setValue(text2.getText().toString());
+                        postRef.child("Division").setValue(spinner2.getSelectedItem().toString());
+                        postRef.child("BloodGroup").setValue(spinner1.getSelectedItem().toString());
+                        postRef.child("Time").setValue(Time);
+                        postRef.child("Date").setValue(Date);
+                        Toast.makeText(PostActivity.this, "Your post has been created successfully", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(PostActivity.this, Dashboard.class));
+                        finish();
+                    }
+                } else {
+                    Toast.makeText(PostActivity.this, "Database error occurred.", Toast.LENGTH_LONG).show();
+                }
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(PostActivity.this, "Failed to save post.", Toast.LENGTH_LONG).show();
+                Log.e("PostActivity", "Database error: " + databaseError.getMessage());
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            getOnBackPressedDispatcher().onBackPressed();
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

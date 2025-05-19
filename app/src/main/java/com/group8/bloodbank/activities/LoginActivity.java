@@ -1,12 +1,12 @@
 package com.group8.bloodbank.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,25 +16,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.group8.bloodbank.MainActivity;
 import com.group8.bloodbank.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button signin, signup, resetpass;
+    private Button signin, signup;
     private EditText inputemail, inputpassword;
     private FirebaseAuth mAuth;
-    private ProgressDialog pd;
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        pd = new ProgressDialog(this);
-        pd.setMessage("Loading...");
-        pd.setCancelable(true);
-        pd.setCanceledOnTouchOutside(false);
+        progressBar = findViewById(R.id.progress_bar);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -50,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
 
         signin = findViewById(R.id.button_login);
         signup = findViewById(R.id.button_register);
-        resetpass = findViewById(R.id.button_forgot_password);
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 try {
                     if(!password.isEmpty() && !email.isEmpty()) {
-                        pd.show();
+                        progressBar.setVisibility(View.VISIBLE);
                         mAuth.signInWithEmailAndPassword(email, password)
                                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                     @Override
@@ -76,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                             startActivity(intent);
                                             finish();
                                         }
-                                        pd.dismiss();
+                                        progressBar.setVisibility(View.GONE);
                                     }
                                 });
                     }
@@ -100,12 +95,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        resetpass.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), RestorePassword.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 }

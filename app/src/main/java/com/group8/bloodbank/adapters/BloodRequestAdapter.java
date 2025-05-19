@@ -58,7 +58,7 @@ public class BloodRequestAdapter extends RecyclerView.Adapter<BloodRequestAdapte
         }
         else
         {
-            postHolder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            postHolder.itemView.setBackgroundColor(Color.parseColor("#DF514D"));
         }
 
         CustomUserData customUserData = postLists.get(i);
