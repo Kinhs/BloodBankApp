@@ -29,7 +29,8 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".activities.CreateAccountActivity"
-            android:label="Create Account"  />
+            android:label="Create Account"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"/>
         <activity android:name=".activities.Dashboard"/>
         <activity android:name=".activities.PostActivity"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"/>

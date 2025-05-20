@@ -69,7 +69,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         isDonor = findViewById(R.id.checkbox);
 
         Button btnSignup = findViewById(R.id.button_register);
-        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (mAuth.getCurrentUser() != null) {
 
@@ -78,8 +78,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             retypePassword.setVisibility(View.GONE);
             btnSignup.setText("Update Profile");
             pd.dismiss();
-            //Objects.requireNonNull(getActionBar()).setTitle("Profile");
-            //Objects.requireNonNull(getSupportActionBar()).setTitle("Profile");
+            getSupportActionBar().setTitle("Profile");
             findViewById(R.id.image_logo).setVisibility(View.GONE);
             isUpdate = true;
 
